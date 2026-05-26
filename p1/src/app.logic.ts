@@ -9,7 +9,7 @@ export function createTodo(title: string): Todo {
     completed: false
   };
 }
-export function updateTodo(todos: Todo[],id:String,title: string): Todo[] {
+export function updateTodo(todos: Todo[], id: string, title: string): Todo[] {
 return todos.map((todo) => {
         if (todo.id !== id){
             return todo;
