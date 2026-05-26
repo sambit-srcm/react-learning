@@ -2,17 +2,18 @@ import { state } from '../app.state';
 import { createTodo, updateTodo } from '../app.logic';
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
+import { CLASS_CARD, CLASS_INPUT, CLASS_BTN_PRIMARY } from '../constants/classes';
 
 export function Form(): HTMLFormElement {
   const form = document.createElement('form');
-  form.className = 'card';
+  form.className = CLASS_CARD;
   const input = document.createElement('input');
-  input.className = 'input';
+  input.className = CLASS_INPUT;
   input.placeholder = 'Enter todo';
   input.value = state.form.title;
 
   const button = document.createElement('button');
-  button.className = 'btn btn--primary';
+  button.className = CLASS_BTN_PRIMARY;
   button.type = 'submit';
   button.textContent = state.form.editId
     ? 'Update'
