@@ -6,39 +6,40 @@ import {
 
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
+import { CLASS_CARD, CLASS_ROW, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
 
 export function Table(): HTMLDivElement {
   const container = document.createElement('div');
-  container.className = 'card';
+  container.className = CLASS_CARD;
   if (state.todos.length === 0) {
     container.textContent = 'No todos available, get started by adding some!!!!!';
     return container;
   }
   const list = document.createElement('div');
-  list.className = 'row';
+  list.className = CLASS_ROW;
   state.todos.forEach((todo) => {
     const row = document.createElement('div');
-    row.className = 'row';
+    row.className = CLASS_ROW;
     const left = document.createElement('div');
-    left.className = 'row';
+    left.className = CLASS_ROW;
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = todo.completed;
     const title = document.createElement('span');
     title.textContent = todo.title;
     if (todo.completed) {
-      title.classList.add('completed');
+      title.classList.add(CLASS_COMPLETED);
     }
     left.appendChild(checkbox);
     left.appendChild(title);
 
     const actions = document.createElement('div');
-    actions.className = 'row';
+    actions.className = CLASS_ROW;
     const editButton = document.createElement('button');
-    editButton.className = 'btn btn--primary';
+    editButton.className = CLASS_BTN_PRIMARY;
     editButton.textContent = 'Edit';
     const deleteButton = document.createElement('button');
-    deleteButton.className = 'btn btn--danger';
+    deleteButton.className = CLASS_BTN_DANGER;
     deleteButton.textContent = 'Delete';
     actions.appendChild(editButton);
     actions.appendChild(deleteButton);

@@ -1,5 +1,6 @@
 import { Form } from './Form';
 import { Table } from './Table';
+import { CLASS_APP } from '../constants/classes';
 
 export function renderApp(): void {
   const root = document.getElementById('app');
@@ -8,7 +9,7 @@ export function renderApp(): void {
   }
   root.replaceChildren();
   const app = document.createElement('div');
-  app.className = 'app';
+  app.className = CLASS_APP;
   app.appendChild(Form());
   app.appendChild(Table());
 root.appendChild(app);
