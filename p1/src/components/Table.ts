@@ -8,6 +8,7 @@ import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
 import { CLASS_CARD, CLASS_ROW, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
 
+/** Builds and returns the todo list element, or an empty-state message if there are no todos. */
 export function Table(): HTMLDivElement {
   const container = document.createElement('div');
   container.className = CLASS_CARD;

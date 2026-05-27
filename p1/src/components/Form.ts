@@ -4,6 +4,7 @@ import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
 import { CLASS_CARD, CLASS_INPUT, CLASS_BTN_PRIMARY } from '../constants/classes';
 
+/** Builds and returns the add/edit todo form element. */
 export function Form(): HTMLFormElement {
   const form = document.createElement('form');
   form.className = CLASS_CARD;
