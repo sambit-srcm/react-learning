@@ -7,6 +7,7 @@ import {
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
 
+/** Builds and returns the todo list element, or an empty-state message if there are no todos. */
 export function Table(): HTMLDivElement {
   const container = document.createElement('div');
   container.className = 'card';

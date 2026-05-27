@@ -3,6 +3,7 @@ import { createTodo, updateTodo } from '../app.logic';
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
 
+/** Builds and returns the add/edit todo form element. */
 export function Form(): HTMLFormElement {
   const form = document.createElement('form');
   form.className = 'card';
