@@ -3,18 +3,21 @@ import type { AppState } from './types';
 
 const key = 'state';
 export function saveToStorage(): void {
-  localStorage.setItem(
-    key,
-    JSON.stringify(state)
-  );
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+  } catch (err) {
+    console.error('Failed to save state to localStorage:', err);
+  }
 }
 
 export function loadFromStorage(): void {
-  const raw = localStorage.getItem(key);
-  if (!raw) {
-    return;
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return;
+    const data: AppState = JSON.parse(raw);
+    Object.assign(state, data);
+  } catch (err) {
+    console.error('Failed to load state from localStorage — clearing corrupted data:', err);
+    localStorage.removeItem(key);
   }
-
-  const data: AppState = JSON.parse(raw);
-  Object.assign(state, data);
 }

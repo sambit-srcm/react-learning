@@ -24,22 +24,22 @@ export function Form(): HTMLFormElement {
     const todoitem = input.value.trim();
     if (!todoitem) {
       alert('Title of the todo is required');
-      return
+      return;
     }
-    if (state.form.editId) {
-      state.todos = updateTodo(
-        state.todos,
-        state.form.editId,
-        todoitem
-      );
-      state.form.editId = null;
-    } else {
-      const todo = createTodo(todoitem);
-      state.todos.push(todo);
+    try {
+      if (state.form.editId) {
+        state.todos = updateTodo(state.todos, state.form.editId, todoitem);
+        state.form.editId = null;
+      } else {
+        const todo = createTodo(todoitem);
+        state.todos.push(todo);
+      }
+      state.form.title = '';
+      saveToStorage();
+      renderApp();
+    } catch (err) {
+      console.error('Failed to submit todo form:', err);
     }
-    state.form.title = '';
-    saveToStorage();
-    renderApp();
   });
 
   return form;
