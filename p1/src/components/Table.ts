@@ -42,10 +42,12 @@ export function Table(): HTMLDivElement {
     editButton.className = CLASS_BTN_PRIMARY;
     editButton.textContent = 'Edit task';
     editButton.setAttribute('aria-label', `Edit task: "${todo.title}"`);
+    editButton.disabled = todo.completed;
     const deleteButton = document.createElement('button');
     deleteButton.className = CLASS_BTN_DANGER;
     deleteButton.textContent = 'Delete task';
     deleteButton.setAttribute('aria-label', `Delete task: "${todo.title}"`);
+    deleteButton.disabled = todo.completed;
     actions.appendChild(editButton);
     actions.appendChild(deleteButton);
     row.appendChild(left);
