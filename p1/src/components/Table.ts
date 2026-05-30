@@ -37,9 +37,11 @@ export function Table(): HTMLDivElement {
     const editButton = document.createElement('button');
     editButton.className = 'btn btn--primary';
     editButton.textContent = 'Edit';
+    editButton.disabled = todo.completed;
     const deleteButton = document.createElement('button');
     deleteButton.className = 'btn btn--danger';
     deleteButton.textContent = 'Delete';
+    deleteButton.disabled = todo.completed;
     actions.appendChild(editButton);
     actions.appendChild(deleteButton);
     row.appendChild(left);
