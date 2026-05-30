@@ -58,31 +58,33 @@ export function Table(): HTMLDivElement {
 
     
     editButton.addEventListener('click', (): void => {
-      state.form.title = todo.title;
-
-      state.form.editId = todo.id;
-
-      renderApp();
+      try {
+        state.form.title = todo.title;
+        state.form.editId = todo.id;
+        renderApp();
+      } catch (err) {
+        console.error('Failed to open todo for editing:', err);
+      }
     });
-    
+
     checkbox.addEventListener('change', (): void => {
-      state.todos = toggleTodo(
-        state.todos,
-        todo.id
-      );
-      saveToStorage();
-      renderApp();
+      try {
+        state.todos = toggleTodo(state.todos, todo.id);
+        saveToStorage();
+        renderApp();
+      } catch (err) {
+        console.error('Failed to toggle todo:', err);
+      }
     });
 
     deleteButton.addEventListener('click', (): void => {
-      state.todos = deleteTodo(
-        state.todos,
-        todo.id
-      );
-
-      saveToStorage();
-
-      renderApp();
+      try {
+        state.todos = deleteTodo(state.todos, todo.id);
+        saveToStorage();
+        renderApp();
+      } catch (err) {
+        console.error('Failed to delete todo:', err);
+      }
     });
 
 
