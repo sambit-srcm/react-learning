@@ -55,6 +55,14 @@ input {
   padding: var(--space-md);
 }
 
+form.card {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-sm);
+}
+
 .row {
   display: flex;
 
@@ -66,7 +74,9 @@ input {
 }
 
 .input {
-  width: 100%;
+  flex: 1;
+
+  min-width: 0;
 
   padding: var(--space-sm);
 
@@ -95,6 +105,56 @@ input {
   background: var(--color-danger);
 
   color: white;
+}
+
+.todo-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-sm);
+}
+
+.todo-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--space-sm);
+}
+
+.todo-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-sm);
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+.todo-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-sm);
+
+  flex-shrink: 0;
+}
+
+.todo-title {
+  flex: 1;
+
+  min-width: 0;
+
+  overflow-wrap: break-word;
+
+  word-break: break-word;
 }
 
 .completed {
