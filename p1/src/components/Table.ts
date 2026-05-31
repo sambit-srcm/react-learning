@@ -25,23 +25,28 @@ export function Table(): HTMLDivElement {
     left.className = CLASS_ROW;
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.id = `todo-${todo.id}`;
     checkbox.checked = todo.completed;
-    const title = document.createElement('span');
-    title.textContent = todo.title;
+    const label = document.createElement('label');
+    label.htmlFor = `todo-${todo.id}`;
+    label.textContent = todo.title;
     if (todo.completed) {
-      title.classList.add(CLASS_COMPLETED);
+      label.classList.add(CLASS_COMPLETED);
     }
     left.appendChild(checkbox);
-    left.appendChild(title);
+    left.appendChild(label);
 
     const actions = document.createElement('div');
     actions.className = CLASS_ROW;
     const editButton = document.createElement('button');
     editButton.className = CLASS_BTN_PRIMARY;
-    editButton.textContent = 'Edit';
+    editButton.textContent = 'Edit task';
+    editButton.setAttribute('aria-label', `Edit task: "${todo.title}"`);
     const deleteButton = document.createElement('button');
     deleteButton.className = CLASS_BTN_DANGER;
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'Delete task';
+    deleteButton.setAttribute('aria-label', `Delete task: "${todo.title}"`);
+
     actions.appendChild(editButton);
     actions.appendChild(deleteButton);
     row.appendChild(left);
