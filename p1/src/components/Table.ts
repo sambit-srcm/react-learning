@@ -30,6 +30,7 @@ export function Table(): HTMLDivElement {
     const label = document.createElement('label');
     label.htmlFor = `todo-${todo.id}`;
     label.textContent = todo.title;
+    label.className = 'todo-title';
     if (todo.completed) {
       label.classList.add(CLASS_COMPLETED);
     }
