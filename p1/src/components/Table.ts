@@ -6,7 +6,7 @@ import {
 
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
-import { CLASS_CARD, CLASS_ROW, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
+import { CLASS_CARD, CLASS_ROW, CLASS_TODO_TITLE, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
 
 /** Builds and returns the todo list element, or an empty-state message if there are no todos. */
 export function Table(): HTMLDivElement {
@@ -30,6 +30,7 @@ export function Table(): HTMLDivElement {
     const label = document.createElement('label');
     label.htmlFor = `todo-${todo.id}`;
     label.textContent = todo.title;
+    label.className = CLASS_TODO_TITLE;
     if (todo.completed) {
       label.classList.add(CLASS_COMPLETED);
     }
