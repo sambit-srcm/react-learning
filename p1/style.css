@@ -55,6 +55,14 @@ input {
   padding: var(--space-md);
 }
 
+form.card {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-sm);
+}
+
 .row {
   display: flex;
 
