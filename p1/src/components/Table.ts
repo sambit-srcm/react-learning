@@ -6,7 +6,7 @@ import {
 
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
-import { CLASS_CARD, CLASS_ROW, CLASS_TODO_TITLE, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
+import { CLASS_CARD, CLASS_TODO_LIST, CLASS_TODO_ROW, CLASS_TODO_LEFT, CLASS_TODO_ACTIONS, CLASS_TODO_TITLE, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
 
 /** Builds and returns the todo list element, or an empty-state message if there are no todos. */
 export function Table(): HTMLDivElement {
@@ -17,12 +17,12 @@ export function Table(): HTMLDivElement {
     return container;
   }
   const list = document.createElement('div');
-  list.className = CLASS_ROW;
+  list.className = CLASS_TODO_LIST;
   state.todos.forEach((todo) => {
     const row = document.createElement('div');
-    row.className = CLASS_ROW;
+    row.className = CLASS_TODO_ROW;
     const left = document.createElement('div');
-    left.className = CLASS_ROW;
+    left.className = CLASS_TODO_LEFT;
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = `todo-${todo.id}`;
@@ -38,7 +38,7 @@ export function Table(): HTMLDivElement {
     left.appendChild(label);
 
     const actions = document.createElement('div');
-    actions.className = CLASS_ROW;
+    actions.className = CLASS_TODO_ACTIONS;
     const editButton = document.createElement('button');
     editButton.className = CLASS_BTN_PRIMARY;
     editButton.textContent = 'Edit task';
