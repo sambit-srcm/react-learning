@@ -2,6 +2,7 @@ import type {Todo} from './types';
 import {generateId} from './utils/id';
 
 
+/** Creates a new todo with a generated id and completed defaulting to false. */
 export function createTodo(title: string): Todo {
   return {
     id: generateId(),
@@ -9,7 +10,8 @@ export function createTodo(title: string): Todo {
     completed: false
   };
 }
-export function updateTodo(todos: Todo[],id:String,title: string): Todo[] {
+/** Returns a new todos array with the matching todo's title replaced. */
+export function updateTodo(todos: Todo[], id: string, title: string): Todo[] {
 return todos.map((todo) => {
         if (todo.id !== id){
             return todo;
@@ -23,7 +25,8 @@ return todos.map((todo) => {
 
 }
 
-export function deleteTodo(todos: Todo[],id: string): Todo[] {
+/** Returns a new todos array with the matching todo removed. */
+export function deleteTodo(todos: Todo[], id: string): Todo[] {
   return todos.filter((todo) => todo.id !== id);
 }
 
@@ -35,7 +38,8 @@ export function deleteTodo(todos: Todo[],id: string): Todo[] {
 //   };
 // }
 
-export function toggleTodo(todos: Todo[],id: string): Todo[] {
+/** Returns a new todos array with the matching todo's completed status flipped. */
+export function toggleTodo(todos: Todo[], id: string): Todo[] {
   return todos.map((todo) => {
     if (todo.id !== id) {
       return todo;

@@ -6,40 +6,49 @@ import {
 
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './App';
+import { CLASS_CARD, CLASS_COMPLETED, CLASS_BTN_PRIMARY, CLASS_BTN_DANGER } from '../constants/classes';
 
+/** Builds and returns the todo list element, or an empty-state message if there are no todos. */
 export function Table(): HTMLDivElement {
   const container = document.createElement('div');
-  container.className = 'card';
+  container.className = CLASS_CARD;
   if (state.todos.length === 0) {
     container.textContent = 'No todos available, get started by adding some!!!!!';
     return container;
   }
   const list = document.createElement('div');
-  list.className = 'row';
+  list.className = 'todo-list';
   state.todos.forEach((todo) => {
     const row = document.createElement('div');
-    row.className = 'row';
+    row.className = 'todo-row';
     const left = document.createElement('div');
-    left.className = 'row';
+    left.className = 'todo-left';
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.id = `todo-${todo.id}`;
     checkbox.checked = todo.completed;
-    const title = document.createElement('span');
-    title.textContent = todo.title;
+    const label = document.createElement('label');
+    label.htmlFor = `todo-${todo.id}`;
+    label.textContent = todo.title;
+    label.className = 'todo-title';
     if (todo.completed) {
-      title.classList.add('completed');
+      label.classList.add(CLASS_COMPLETED);
     }
     left.appendChild(checkbox);
-    left.appendChild(title);
+    left.appendChild(label);
 
     const actions = document.createElement('div');
-    actions.className = 'row';
+    actions.className = 'todo-actions';
     const editButton = document.createElement('button');
-    editButton.className = 'btn btn--primary';
-    editButton.textContent = 'Edit';
+    editButton.className = CLASS_BTN_PRIMARY;
+    editButton.textContent = 'Edit task';
+    editButton.setAttribute('aria-label', `Edit task: "${todo.title}"`);
+    editButton.disabled = todo.completed;
     const deleteButton = document.createElement('button');
-    deleteButton.className = 'btn btn--danger';
-    deleteButton.textContent = 'Delete';
+    deleteButton.className = CLASS_BTN_DANGER;
+    deleteButton.textContent = 'Delete task';
+    deleteButton.setAttribute('aria-label', `Delete task: "${todo.title}"`);
+    deleteButton.disabled = todo.completed;
     actions.appendChild(editButton);
     actions.appendChild(deleteButton);
     row.appendChild(left);
@@ -50,31 +59,33 @@ export function Table(): HTMLDivElement {
 
     
     editButton.addEventListener('click', (): void => {
-      state.form.title = todo.title;
-
-      state.form.editId = todo.id;
-
-      renderApp();
+      try {
+        state.form.title = todo.title;
+        state.form.editId = todo.id;
+        renderApp();
+      } catch (err) {
+        console.error('Failed to open todo for editing:', err);
+      }
     });
-    
+
     checkbox.addEventListener('change', (): void => {
-      state.todos = toggleTodo(
-        state.todos,
-        todo.id
-      );
-      saveToStorage();
-      renderApp();
+      try {
+        state.todos = toggleTodo(state.todos, todo.id);
+        saveToStorage();
+        renderApp();
+      } catch (err) {
+        console.error('Failed to toggle todo:', err);
+      }
     });
 
     deleteButton.addEventListener('click', (): void => {
-      state.todos = deleteTodo(
-        state.todos,
-        todo.id
-      );
-
-      saveToStorage();
-
-      renderApp();
+      try {
+        state.todos = deleteTodo(state.todos, todo.id);
+        saveToStorage();
+        renderApp();
+      } catch (err) {
+        console.error('Failed to delete todo:', err);
+      }
     });
 
 
